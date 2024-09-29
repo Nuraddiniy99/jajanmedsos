@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap">
+  <link rel="stylesheet" href="../assets/css/form.css">
+  <title>Jajan Medsos</title>
+  <link rel="icon" href="../assets/images/logotab.svg" type="image/png">
+</head>
+
+<header>
+  <img src="../assets/images/headerlg.svg" alt="Logo" /> <!-- Ganti "logo.png" dengan path ke file logo Anda -->
+  <button class="daftar-harga-btn" onclick="window.location.href='../Harga/tiktok.html'">Kembali</button>
+</header>
+
+<body>
+    <!-- ***** POPUP ***** -->
+    <div id="whatsapp-popup">
+      <a href="https://api.whatsapp.com/send?phone=6285880856341&amp;text=Assalamualaikum%20WR.%20WB.%0A%0AHalo%20ka...%0ASaya%20mau%20tanya-tanya%20nih%20seputar%20Jajan%20Medsos%0AHarga%20dan%20Kelebihannya%F0%9F%98%81%0A%0Ahttps%3A%2F%2Fjajanmedsos.netlify.app"
+         target="_blank"
+         rel="noopener noreferrer">
+        <img src="../assets/images/waicon.png" alt="WhatsApp Logo">
+        <span>Hubungi Kami</span>
+      </a>
+    </div>
+  <div class="deskripsi">
+    <div class="left-column">
+      <img src="../assets/images/tt.svg" alt="Deskripsi Gambar">
+      <h1>Followers World Wide</h1>
+      <ul><strong>Syarat dan Ketentuan</strong>
+        <li>🔓 Mohon pastikan akun Anda bersifat publik, bukan pribadi.</li>
+        <li>Periksa format tautan dengan cermat sebelum melakukan pemesanan.</li>
+        <li>Masukan Link Format : https://www.tiktok.com/@example OR @example</li>
+        <li>Dilarang Mengganti Username</li>
+        <li>Proses Akan dikerjakan langsung setelah pembayaran</li>
+        <li>Proses Pengerjaan 1/24 jam</li>
+      </ul>
+      <ul><strong>Spesifikasi</strong>
+        <li>Bergaransi 30 hari</li>
+        <li>Followers berasal dari pengguna Real Aktif Random</li>
+        <li>Low Drop⭐</li>
+        <li>Max-order per akun 500k</li>
+        <br><strong>Masih Ragu? Tanya-tanya dulu yuk di WA 😁<strong>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form">
+    <div class="form-container">
+      <div class="form-group">
+        <h1>Form Pemesanan</h1>
+        <label for="link">Target Link:</label>
+        <input type="text" id="link" placeholder="Masukan @Username/Link">
+      </div>
+      <div class="form-group">
+        <label for="quantity">Jumlah Order (min-100):</label>
+        <input type="number" id="quantity" min="1000" placeholder="Masukan Jumlah Order (min-100)">
+      </div>
+  
+      <div class="form-group2">
+        <label for="discountDate">Promo 1-7 Setiap Bulan!</label>
+        <input type="text" id="discountDate" readonly>
+        <label for="totalPrice">Total Harga:</label>
+        <del><span id="originalPrice"></span></del>
+        <input type="text" id="totalPrice" readonly>
+      </div>
+      <div class="button">
+        <button onclick="sendWhatsAppMessage()">Kirim Form ke WhatsApp</button>
+      </div>
+      
+    </div>
+  </div>
+  
+  <script>
+    function formatRupiah(amount) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+  
+    function calculateDiscount() {
+      const quantity = document.getElementById('quantity').value;
+      const totalPrice = quantity * 145;
+      const currentDate = new Date();
+      const discountDate = currentDate.getDate() >= 1 && currentDate.getDate() <= 7;
+
+      const discountAmount = discountDate ? 0.10 : 0;
+
+      const finalPrice = totalPrice * (1 - discountAmount);
+
+      // Menambahkan harga total sebelum diskon ke dalam elemen dengan id 'originalPrice'
+      document.getElementById('originalPrice').innerHTML = `<span style="text-decoration: line-through;">${formatRupiah(totalPrice)}</span>`;
+
+      document.getElementById('discountDate').value = discountDate ? 'Selamat Diskon 10%' : 'Maaf Belum Tersedia😫';
+      document.getElementById('totalPrice').value = formatRupiah(finalPrice);
+    }
+  
+    function sendWhatsAppMessage() {
+      const link = document.getElementById('link').value;
+      const quantity = document.getElementById('quantity').value;
+      const discountDate = document.getElementById('discountDate').value;
+      const totalPrice = document.getElementById('totalPrice').value;
+  
+      const message = `
+https://jajanmedsos.netlify.app
+
+*TIKTOK REAL WORLD FOLLOWERS*
+_${"Assalamualaikum ka.."}_
+Saya Mau Order Paket ini dengan deskripsi berikut:
+
+- *Username/Link:* ${link}
+- *Jumlah Order:* ${quantity}
+- *Promo Tanggal:* ${discountDate}
+- *Total Harga:* ${totalPrice}
+
+4645|${link}|${quantity}
+`;
+  
+      const whatsappLink = `https://wa.me/6285880856341?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappLink;
+    }
+  
+    document.getElementById('quantity').addEventListener('input', calculateDiscount);
+    calculateDiscount(); // Calculate discount on page load
+  </script>
+
+  <script>
+    // Function to redirect to WhatsApp link
+    function redirectToWhatsApp() {
+        // Replace 'YOUR_WHATSAPP_LINK' with your actual WhatsApp link
+        window.location.href = 'https://wa.me/6285880856341';
+    }
+
+    // Function to show the WhatsApp popup when scrolling
+    function showWhatsAppPopup() {
+        var whatsappPopup = document.getElementById('whatsapp-popup');
+        if (window.scrollY > -10) {
+            whatsappPopup.style.display = 'block';
+        } else {
+            whatsappPopup.style.display = 'none';
+        }
+    }
+
+    // Attach the showWhatsAppPopup function to the scroll event
+    window.onscroll = function () {
+        showWhatsAppPopup();
+    };
+
+    // Initial check to show/hide the WhatsApp popup based on scroll position
+    showWhatsAppPopup();
+  </script>
+  
+</body>
+</html>
